@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 
 export const NavBar = (props) => {
-    
         return (
             <nav className="navbar bg-dark text-white flex-md-nowrap p-0 shadow">
                 <ul className="nav nav-pills nav-fill">
@@ -27,13 +26,10 @@ export const NavBar = (props) => {
                 <span className="navbar-text">
                     <ul className="nav nav-pills nav-fill">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/register">Register</Link>
+                            <Link className="nav-link" to="/logout">Logout</Link>
                         </li>
                     </ul>
                 </span>
             </nav>
         )
     }
-
-
-export default NavBar

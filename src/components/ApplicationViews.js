@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import React, { Component } from "react";
 import { ArticleList } from "./article/ArticleList";
 
 
@@ -20,4 +19,3 @@ export const ApplicationViews = () => {
      
     );
   }
-
