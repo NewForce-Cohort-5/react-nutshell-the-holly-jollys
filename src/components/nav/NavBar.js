@@ -1,10 +1,9 @@
-import React, { Component } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 
-class NavBar extends Component {
-    render() {
+export const NavBar = (props) => {
         return (
             <nav className="navbar bg-dark text-white flex-md-nowrap p-0 shadow">
                 <ul className="nav nav-pills nav-fill">
@@ -27,13 +26,10 @@ class NavBar extends Component {
                 <span className="navbar-text">
                     <ul className="nav nav-pills nav-fill">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/register">Register</Link>
+                            <Link className="nav-link" to="/logout">Logout</Link>
                         </li>
                     </ul>
                 </span>
             </nav>
         )
     }
-}
-
-export default NavBar
