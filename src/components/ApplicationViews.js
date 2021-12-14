@@ -1,55 +1,23 @@
 import { Route } from "react-router-dom";
 import React, { Component } from "react";
+import { ArticleList } from "./article/ArticleList";
 
-export default class ApplicationViews extends Component {
 
-  render() {
-    return (
-      <>
+//ApplicationViews renders the function based on the web address
+export const ApplicationViews = () => {
 
-        <Route
-          exact path="/" render={props => {
-            return null
-            // Remove null and return the component which will show news articles
-          }}
-        />
+  return  (
+      
+        <Routes>
 
-        <Route
-          exact path="/register" render={props => {
-            return null
-            // Remove null and return the component which will handle user registration
-          }}
-        />
+          {/* Home render when http://localhost:3000/articles */}
+          <Route exact path="articles/*" element={<ArticleList />} />
 
-        <Route
-          path="/friends" render={props => {
-            return null
-            // Remove null and return the component which will show list of friends
-          }}
-        />
+        
+        
+        </Routes>
 
-        <Route
-          path="/messages" render={props => {
-            return null
-            // Remove null and return the component which will show the messages
-          }}
-        />
-
-        <Route
-          path="/tasks" render={props => {
-            return null
-            // Remove null and return the component which will show the user's tasks
-          }}
-        />
-
-        <Route
-          path="/events" render={props => {
-            return null
-            // Remove null and return the component which will show the user's events
-          }}
-        />
-
-    </>  
+     
     );
   }
-}
+
