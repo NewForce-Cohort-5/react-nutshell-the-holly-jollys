@@ -3,20 +3,13 @@ import "./Article.css"
 import { useParams, useNavigate } from "react-router-dom"
 import { ArticleContext } from "./ArticleProvider"
 import { Link } from "react-router-dom"
-import { Button } from "bootstrap"
-import { useState } from "react"
-import { Modal } from "bootstrap"
 
 export const ArticleCard = ({article}) => {
-    const {getAnimalById, deleteArticle} = useContext(ArticleContext)
+    const {getArticleById, deleteArticle} = useContext(ArticleContext)
     const navigate = useNavigate()
     const {articleId} = useParams
-
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
     
-    const handleTimestamp = ""
+    
     
     const handleDelete = () => {
         deleteArticle(article.id)
@@ -25,67 +18,24 @@ export const ArticleCard = ({article}) => {
         })
       }
     
+      let currentTimestamp = article.date
+      let date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(currentTimestamp)
+      
     return (
     <section className="article">
-        <h3 className="articleTitle">{article.title}</h3>
-        <div className="articleSynopsis">{article.synopsis}</div>
-        <a href={article.url} target="_blank" className="articleURL">Read Article<br></br></a>
+        <h3 className="articleTitle">Title: {article.title}</h3>
+        
+        <h4 className="articleSynopsis">Synopsis</h4>
+        <p>{article.synopsis}</p>
+        <a href={article.url} target="_blank" className="articleURL">Read Article</a><br></br>
+        <p>Last updated: {date}</p>
+        
         <button onClick={() => {
     navigate(`/articles/edit/${article.id}`)}}
     >Edit</button>
     <button onClick={handleDelete}>Delete Article</button>
     
-     <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-
     </section>
 )
 }
-
-// function Example() {
-//   const [show, setShow] = useState(false);
-
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
-
-//   return (
-//     <>
-//       <Button variant="primary" onClick={handleShow}>
-//         Launch demo modal
-//       </Button>
-
-//       <Modal show={show} onHide={handleClose}>
-//         <Modal.Header closeButton>
-//           <Modal.Title>Modal heading</Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-//         <Modal.Footer>
-//           <Button variant="secondary" onClick={handleClose}>
-//             Close
-//           </Button>
-//           <Button variant="primary" onClick={handleClose}>
-//             Save Changes
-//           </Button>
-//         </Modal.Footer>
-//       </Modal>
-//     </>
-//   );
-// }
 

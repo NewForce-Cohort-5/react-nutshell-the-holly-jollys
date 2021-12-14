@@ -10,7 +10,12 @@ export const ArticleProvider = (props) => {
     //useState hook defines a variable that holds the state of the compnent and a function to update it
     const [articles, setArticles] = useState([])
 
-    
+    let articlesArray = []
+    const useArticles = () => {
+        return articlesArray.slice()
+    }
+
+
     const getArticles = () => {
         return fetch("http://localhost:8088/articles")
         .then(res => res.json())
@@ -60,7 +65,7 @@ export const ArticleProvider = (props) => {
     */
     return (
         <ArticleContext.Provider value={{
-            articles, getArticles, addArticle, getArticleById, updateArticle, deleteArticle, searchTerms, setSearchTerms
+            articles, getArticles, addArticle, getArticleById, updateArticle, deleteArticle, searchTerms, setSearchTerms, useArticles
         }}>
             {props.children}
         </ArticleContext.Provider>

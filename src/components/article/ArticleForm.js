@@ -6,6 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 export const ArticleForm = () => {
     const { addArticle, getArticleById, updateArticle } = useContext(ArticleContext)
     
+    const currentTimestamp = Date.now()
+    let date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(currentTimestamp)
 
     //for edit, hold on to state of article in this view
     const [article, setArticle] = useState({})
@@ -27,13 +29,15 @@ export const ArticleForm = () => {
       //article is an object with properties.
       //set the property to the new value
       //if we want to target id [event.target.id]
-      newArticle[event.target.title] = event.target.value
+      newArticle[event.target.name] = event.target.value
       //update state
       setArticle(newArticle)
     }
 
+    
+
     const handleSaveArticle = () => {
-      if (parseInt(article.articleId) === 0 || parseInt(article.customerId) === 0) {
+      if (parseInt(article.articleId) === "" ){
           window.alert("Please select a article and customer")
       } else {
         //setIsLoading disables the button - no extra clicks
@@ -46,7 +50,8 @@ export const ArticleForm = () => {
               title: article.title,
               url: article.url,
               synopsis: article.synopsis,
-              date: ""
+              date: currentTimestamp,
+              userId: +localStorage.activeUser
               
           })
           .then(() => navigate(`/articles/detail/${article.id}`))
@@ -56,13 +61,30 @@ export const ArticleForm = () => {
               title: article.title,
               url: article.url,
               synopsis: article.synopsis,
-              date: ""
+              date: currentTimestamp,
+              userId: +localStorage.activeUser
               
           })
           .then(() => navigate("/articles"))
         }
       }
     }
+
+    // Get customers and locations. If articleId is in the URL, getArticleById and set state. Gives inputs information.
+    //If fills information for edit form. Else populates new form.
+    useEffect(() => {
+        
+          if (articleId){
+            getArticleById(articleId)
+            .then(article => {
+                setArticle(article)
+                setIsLoading(false)
+            })
+          } else {
+            setIsLoading(false)
+          }
+        
+      }, [])
 
    
 
@@ -71,17 +93,42 @@ export const ArticleForm = () => {
 
     return (
       <form className="articleForm">
-        <h2 className="articleForm__title">New Article</h2>
+        <h2 className="articleForm__title">{articleId ? <>Update Article</> : <>Add Article</>}</h2>
         <fieldset>
           <div className="form-group">
-            <label htmlFor="articleName">Article name: </label>
-            <input type="text" id="articleName" name="name" required autoFocus className="form-control"
-            placeholder="article name"
+            <label htmlFor="articleName">Article title: </label>
+            <input type="text" id="articleName" name="title" required autoFocus className="form-control"
+            placeholder="Article title"
             onChange={handleControlledInputChange}
-            defaultValue={article.name}/>
+            defaultValue={article.title}/>
           </div>
         </fieldset>
         
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="articleURL">URL: </label>
+            <input type="text" id="articleURL" name="url" required className="form-control"
+            placeholder="URL"
+            onChange={handleControlledInputChange}
+            defaultValue={article.url}/>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="articleSynopsis">Synopsis: </label>
+            <input type="text" id="articleSynopsis" name="synopsis" required className="form-control"
+            placeholder="Synopsis"
+            onChange={handleControlledInputChange}
+            defaultValue={article.synopsis}/>
+          </div>
+        </fieldset>
+
+        <fieldset>
+        <div>
+            <div value="{new Date (article.dateSaved).toLocaleDateString('en-US')}"/>
+        </div>    
+        </fieldset>    
         
         <button className="btn btn-primary"
           disabled={isLoading}
@@ -89,7 +136,7 @@ export const ArticleForm = () => {
             event.preventDefault() // Prevent browser from submitting the form and refreshing the page
             handleSaveArticle()
           }}>
-        {articleId ? <>Save Article</> : <>Add Article</>}</button>
+        {articleId ? <>Update Article</> : <>Add Article</>}</button>
       </form>
     )
 }

@@ -5,12 +5,12 @@ import "./Article.css"
 import { useNavigate } from "react-router"
 
 export const ArticleList = () => {
-    const { articles, getArticles, searchTerms } = useContext(ArticleContext)
+    const { articles, getArticles, searchTerms, useArticles } = useContext(ArticleContext)
   
     // Since you are no longer ALWAYS displaying all of the articles
     const [ filteredArticles, setFiltered ] = useState([])
     const navigate = useNavigate()
-  
+    
     // Empty dependency array - useEffect only runs after first render
     useEffect(() => {
         getArticles()
@@ -32,6 +32,7 @@ export const ArticleList = () => {
   
     
     
+    //sorted 
     return (
       <>
         <h1>Articles</h1>
@@ -41,7 +42,7 @@ export const ArticleList = () => {
         </button>
         <div className="articles">
         {
-          filteredArticles.map(article => {
+          filteredArticles.sort((a,b) => { return new Date(b.date) - new Date(a.date)}).map(article => {
             return <ArticleCard key={article.id} article={article} />
           })
         }
