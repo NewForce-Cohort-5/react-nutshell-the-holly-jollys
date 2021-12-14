@@ -1,12 +1,58 @@
+.tasksContainer {
+    padding: 20px;
+}
+
 .tasks {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .task {
+      flex-basis: 44%;
+      margin-top: 1em;
+      padding: 0;
+      border: 1px solid grey;
+  }
+
+.taskListContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
   
-  .task {
-      flex-basis: 28%;
-      margin: 1em;
+  .taskList {
+      flex-basis: 60%;
       padding: 1em;
-      border: 1px solid grey;
+  }
+
+  .checkedTaskContainer {
+    flex-basis: 40%;
+    padding: 1em;
+    text-align: center;
+  }
+
+  input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    transform: scale(2);
+    padding: 20px;
+  }
+
+  .checkedTaskLabel {
+    font-size: 14px;
+  }
+
+  .taskName {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .taskDate {
+    font-size: 14px;
+    margin: 0;
   }

@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 import { TasksContext } from "./TaskDataProvider"
 import { TaskCard } from "./TaskCard"
 import "./Tasks.css"
 
 export const TaskList = () => {
-  const { tasks, getTasks, updateTask } = useContext(TasksContext)
+  const { tasks, getTasks } = useContext(TasksContext)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -15,6 +16,7 @@ export const TaskList = () => {
 
   return (
     <>
+      <div className="tasksContainer">
         <h2>Tasks</h2>
         <button onClick={() => navigate("/tasks/create")}>
             Add Task
@@ -22,9 +24,11 @@ export const TaskList = () => {
         <div className="tasks">
             {/* {console.log("TaskList: Render", tasks)} */}
             {
-                tasks.map(task => <TaskCard key={task.id} task={task} />)
+                tasks.filter(task => task.complete === false).map(task => 
+                  <TaskCard key={task.id} task={task} />)
             }
         </div>
+      </div>
     </>
   )
 }
