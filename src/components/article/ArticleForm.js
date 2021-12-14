@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-
+import { ArticleContext } from "./ArticleProvider";
 import "./Article.css"
 import { useNavigate, useParams } from 'react-router-dom';
 

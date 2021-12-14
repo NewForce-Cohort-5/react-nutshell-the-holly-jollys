@@ -44,13 +44,14 @@ export const ArticleProvider = (props) => {
           .then(getArticles)
       }
       
-      const fireArticle = articleId => {
+      const deleteArticle = articleId => {
         return fetch(`http://localhost:8088/articles/${articleId}`, {
             method: "DELETE"
         })
             .then(getArticles)
     }
 
+    const [ searchTerms, setSearchTerms ] = useState("")
     /*
         You return a context provider which has the
         `Articles` state, `getArticles` function,
@@ -59,7 +60,7 @@ export const ArticleProvider = (props) => {
     */
     return (
         <ArticleContext.Provider value={{
-            articles, getArticles, addArticle, getArticleById, updateArticle, fireArticle
+            articles, getArticles, addArticle, getArticleById, updateArticle, deleteArticle, searchTerms, setSearchTerms
         }}>
             {props.children}
         </ArticleContext.Provider>

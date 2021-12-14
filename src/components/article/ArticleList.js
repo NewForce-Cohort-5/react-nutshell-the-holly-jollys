@@ -22,7 +22,7 @@ export const ArticleList = () => {
     useEffect(() => {
       if (searchTerms !== "") {
         // If the search field is not blank, display matching articles
-        const subset = articles.filter(article => article.name.toLowerCase().includes(searchTerms.toLowerCase()) || article.breed.toLowerCase().includes(searchTerms.toLowerCase()))
+        const subset = articles.filter(article => article.title.toLowerCase().includes(searchTerms.toLowerCase()))
         setFiltered(subset)
       } else {
         // If the search field is blank, display all articles
@@ -34,10 +34,10 @@ export const ArticleList = () => {
     
     return (
       <>
-        <h1>articles</h1>
+        <h1>Articles</h1>
   
         <button onClick={() => navigate("/articles/create")}>
-            Make Reservation
+            Add Article
         </button>
         <div className="articles">
         {
