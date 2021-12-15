@@ -37,8 +37,8 @@ export const TaskForm = () => {
         //PUT - update
         updateTask({
             id: task.id,
-            taskName: task.name,
-            completionDate: task.date,
+            taskName: task.taskName,
+            completionDate: task.completionDate,
             complete: false
         })
         .then(() => navigate(`/tasks/${task.id}`))
@@ -57,9 +57,11 @@ export const TaskForm = () => {
   // Get tasks. If taskId is in the URL, getTaskById
   useEffect(() => {
       if (taskId){
+          console.log(taskId)
         getTaskById(taskId)
         .then(task => {
             setTask(task)
+              console.log(taskId)
             setIsLoading(false)
         })
       } else {
@@ -79,7 +81,7 @@ export const TaskForm = () => {
           <input type="text" id="taskName" name="name" required autoFocus className="form-control"
           placeholder="Task name"
           onChange={handleControlledInputChange}
-          defaultValue={task.name}/>
+          defaultValue={task.taskName}/>
         </div>
       </fieldset>
       <fieldset>
@@ -87,7 +89,7 @@ export const TaskForm = () => {
           <label htmlFor="taskDate">Completion Date: </label>
           <input type="date" id="taskDate" name="date" required className="form-control"
           onChange={handleControlledInputChange}
-          defaultValue={task.date}/>
+          defaultValue={task.completionDate}/>
         </div>
       </fieldset>
       <button className="btn btn-primary"

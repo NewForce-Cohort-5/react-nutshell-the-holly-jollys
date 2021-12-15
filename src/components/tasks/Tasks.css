@@ -52,8 +52,13 @@
     margin: 0;
   }
 
-  .taskDate {
+  .taskDateText {
     font-size: 14px;
+    margin: 0;
+  }
+
+  .taskDate {
+    font-size: 16px;
     margin: 0;
   }
 
@@ -62,5 +67,12 @@
 }
 
   .taskEdit, .taskDel {
-    margin-right: 10px;
+    margin-top: 8px;
+    background-color: white;
+    border: none;
+    text-decoration: underline;
+  }
+  .taskEdit:hover {
+    color: blue;
+    font-weight: bold;
   }
