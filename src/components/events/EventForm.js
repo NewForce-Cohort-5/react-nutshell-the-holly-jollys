@@ -1,72 +1,75 @@
 import React, { useContext, useEffect, useState } from "react"
 import { EventContext } from "./EventData"
 import "./Event.css"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const EventForm = () => {
-    const { addEvent, getEventById, updateEvent } = useContext(EventContext)
+  const { addEvent, getEventById, updateEvent } = useContext(EventContext)
 
-    /*
-    With React, we do not target the DOM with `document.querySelector()`. Instead, our return (render) reacts to state or props.
+  //for edit, hold on to state of animal in this view
+  const [event, setEvent] = useState({})
+  //wait for data before button is active
+  const [isLoading, setIsLoading] = useState(true);
 
-    Define the intial state of the form inputs with useState()
-    */
+  const {eventId} = useParams();
+  const navigate = useNavigate();
 
-    const [event, setEvent] = useState({})
-    // eventName: "",
-    //   eventLocation: "",
-    //   eventDate: "",
-    //   userId: +localStorage.activeUser
-    const [isLoading, setIsLoading] = useState(true);
+  //when field changes, update state. This causes a re-render and updates the view.
+  //Controlled component
+  const handleControlledInputChange = (eventObj) => {
+    //When changing a state object or array,
+    //always create a copy make changes, and then set state.
+    const newEvent = { ...event }
+    //animal is an object with properties.
+    //set the property to the new value
+    newEvent[eventObj.target.name] = eventObj.target.value
+    //update state
+    setEvent(newEvent)
+  }
 
-    const {eventId} = useParams();
-    const navigate = useNavigate();
-
-    /*
-    Reach out to the world and get customers state
-    and locations state on initialization.
-    */
-    useEffect(() => {
-      // eslint-disable-next-line
-    }, [])
-
-    //when a field changes, update state. The return will re-render and display based on the values in state
-    //Controlled component
-    const handleControlledInputChange = (eventObj) => {
-      /* When changing a state object or array,
-      always create a copy, make changes, and then set state.*/
-      const newEvent = { ...event }
-      newEvent[eventObj.target.id] = parseInt(eventObj.target.value) ? parseInt(eventObj.target.value) : eventObj.target.value
-      // update state
-      setEvent(newEvent)
-    }
-
-    const handleSaveEvent = () => {
-        //disable the button - no extra clicks
-        setIsLoading(true);
-        if (eventId){
-          //PUT - update
-          updateEvent({
-              id: event.id,
-              eventName: event.eventName,
-              eventDate: event.eventDate,
-              eventLocation: event.eventLocation,
-              customerId: parseInt(animal.customerId),
-              
-          })
-          .then(() => navigate(`/animals/detail/${animal.id}`))
-        }else {
-          //POST - add
-          addAnimal({
-              name: animal.name,
-              breed: animal.breed,
-              locationId: parseInt(animal.locationId),
-              customerId: parseInt(animal.customerId)
-          })
-          .then(() => navigate("/animals"))
-        }
+  const handleSaveEvent = () => {
+      setIsLoading(true);
+      if (eventId){
+        //PUT - update
+        updateEvent({
+            eventName: event.eventName,
+            eventLocation: event.eventLocation,
+            eventDate: event.eventDate,
+            userId: +localStorage.activeUser,
+            id: event.id
+        })
+        // .then(() => navigate("/events"))
+      } else {
+        //POST - add
+        addEvent({
+            eventName: event.eventName,
+            eventLocation: event.eventLocation,
+            eventDate: event.eventDate,
+            userId: +localStorage.activeUser,
+        })
+        .then(() => navigate("/events"))
       }
-    }
+    
+  }
+
+  // Get customers and locations. If animalId is in the URL, getAnimalById
+  useEffect(() => {
+      if (eventId){
+        getEventById(eventId)
+        .then(event => {
+            setEvent(event)
+            setIsLoading(false)
+        })
+      } else {
+        setIsLoading(false)
+      }
+    
+    // eslint-disable-next-line
+  }, [])
+
+  //since state controlls this component, we no longer need
+  //useRef(null) or ref
+
     
     //   const eventDate = Date(event.eventDate)
     //   event.eventDate = eventDate
