@@ -12,21 +12,27 @@ import { TaskForm } from "./tasks/TaskForm"
 export const ApplicationViews = () => {
 
   return  (
-        <ArticleProvider>
-        <Routes>
+    <TasksProvider>
+    <ArticleProvider>
+    <Routes>
 
-          {/* Home render when http://localhost:3000/articles */}
-          <Route exact path="articles/*" element={<ArticleList />} />
+      {/* Home render when http://localhost:3000/articles */}
+      <Route exact path="articles/*" element={<ArticleList />} />
 
-          {/* Article form */}
-          <Route path="articles/create/*" element={<ArticleForm />} />
+      {/* Article form */}
+      <Route path="articles/create/*" element={<ArticleForm />} />
 
-          {/* editArticls form */}
-          <Route path="articles/edit/:articleId/*" element={<ArticleForm />} />
+      {/* editArticls form */}
+      <Route path="articles/edit/:articleId/*" element={<ArticleForm />} />
+
+      <Route path="tasks/*" element={<TaskList />} />
+      <Route path="tasks/create/*" element={<TaskForm />} />
         
         
-        </Routes>
-        </ArticleProvider>
+    </Routes>
+    </ArticleProvider>
+    </TasksProvider>
+
 
      
     );
