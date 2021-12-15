@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 export const EventList = () => {
   const { events, getEvents } = useContext(EventContext)
   const navigate = useNavigate()
+  
 
   //useEffect - reach out to the world for something
   useEffect(() => {
@@ -14,6 +15,7 @@ export const EventList = () => {
 // eslint-disable-next-line
   }, [])
 
+  events.sort((a,b) => new Date(a.eventDate) - new Date(b.eventDate))
 
   return (
     <>

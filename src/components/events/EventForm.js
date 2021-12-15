@@ -38,7 +38,7 @@ export const EventForm = () => {
             userId: +localStorage.activeUser,
             id: event.id
         })
-        // .then(() => navigate("/events"))
+        .then(() => navigate("/events"))
       } else {
         //POST - add
         addEvent({
@@ -52,7 +52,6 @@ export const EventForm = () => {
     
   }
 
-  // Get customers and locations. If animalId is in the URL, getAnimalById
   useEffect(() => {
       if (eventId){
         getEventById(eventId)
@@ -75,7 +74,7 @@ export const EventForm = () => {
     //   event.eventDate = eventDate
     return (
       <form className="eventForm">
-          <h2 className="eventForm__title">New Event</h2>
+          <h2 className="eventForm__title">{eventId ? <>Update Event</> : <>New Event</>}</h2>
           <fieldset>
               <div className="form-group">
                   <label htmlFor="eventName">Event name:</label>
@@ -97,7 +96,7 @@ export const EventForm = () => {
             event.preventDefault() // Prevent browser from submitting the form and refreshing the page
             handleSaveEvent()
           }}>
-        {eventId ? <>Save Event</> : <>Add Event</>}</button>
+        {eventId ? <>Save Changes</> : <>Add Events</>}</button>
       </form>
     )
     }
