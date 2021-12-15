@@ -56,3 +56,11 @@
     font-size: 14px;
     margin: 0;
   }
+
+.taskEditDel {
+  padding: 5px;
+}
+
+  .taskEdit, .taskDel {
+    margin-right: 10px;
+  }

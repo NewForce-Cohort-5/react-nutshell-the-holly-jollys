@@ -10,6 +10,7 @@ export const ApplicationViews = () => {
             <Routes>
                 <Route path="tasks/*" element={<TaskList />} />
                 <Route path="tasks/create/*" element={<TaskForm />} />
+                <Route path="tasks/edit/:taskId/*" element={<TaskForm />} />
             </Routes>
         </TasksProvider>
     )}
