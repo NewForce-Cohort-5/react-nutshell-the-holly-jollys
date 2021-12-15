@@ -45,8 +45,8 @@ export const TaskForm = () => {
       }else {
         //POST - add
         addTask({
-            taskName: task.name,
-            completionDate: task.date,
+            taskName: task.taskName,
+            completionDate: task.completionDate,
             complete: false
         })
         .then(() => navigate("/tasks"))
@@ -78,7 +78,7 @@ export const TaskForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="taskName">Task name: </label>
-          <input type="text" id="taskName" name="name" required autoFocus className="form-control"
+          <input type="text" id="taskName" name="taskName" required autoFocus className="form-control"
           placeholder="Task name"
           onChange={handleControlledInputChange}
           defaultValue={task.taskName}/>
@@ -87,7 +87,7 @@ export const TaskForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="taskDate">Completion Date: </label>
-          <input type="date" id="taskDate" name="date" required className="form-control"
+          <input type="date" id="taskDate" name="completionDate" required className="form-control"
           onChange={handleControlledInputChange}
           defaultValue={task.completionDate}/>
         </div>
