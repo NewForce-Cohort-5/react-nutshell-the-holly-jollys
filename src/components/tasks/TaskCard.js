@@ -20,7 +20,8 @@ export const TaskCard = () => {
     const handleDelete = () => {
         deleteTask(task.id)
         .then(() => {
-            navigate("/tasks")
+            // navigate("/tasks")
+            getTasks()
         })
     }
 
