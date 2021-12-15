@@ -4,7 +4,7 @@ import "./Event.css"
 import { useNavigate } from 'react-router-dom';
 
 export const EventForm = () => {
-    const { addEvent } = useContext(EventContext)
+    const { addEvent, getEventById, updateEvent } = useContext(EventContext)
 
     /*
     With React, we do not target the DOM with `document.querySelector()`. Instead, our return (render) reacts to state or props.
@@ -12,13 +12,14 @@ export const EventForm = () => {
     Define the intial state of the form inputs with useState()
     */
 
-    const [event, setEvent] = useState({
-      eventName: "",
-      eventLocation: "",
-      eventDate: "",
-      userId: +localStorage.activeUser
-    });
+    const [event, setEvent] = useState({})
+    // eventName: "",
+    //   eventLocation: "",
+    //   eventDate: "",
+    //   userId: +localStorage.activeUser
+    const [isLoading, setIsLoading] = useState(true);
 
+    const {eventId} = useParams();
     const navigate = useNavigate();
 
     /*
@@ -35,20 +36,37 @@ export const EventForm = () => {
       /* When changing a state object or array,
       always create a copy, make changes, and then set state.*/
       const newEvent = { ...event }
-      /* Animal is an object with properties.
-      Set the property to the new value
-      using object bracket notation. */
       newEvent[eventObj.target.id] = parseInt(eventObj.target.value) ? parseInt(eventObj.target.value) : eventObj.target.value
       // update state
       setEvent(newEvent)
     }
 
-    const handleClickSaveEvent = (eventObj) => {
-      eventObj.preventDefault() //Prevents the browser from submitting the form
-
-        addEvent(event)
-        .then(() => navigate("/events"))
+    const handleSaveEvent = () => {
+        //disable the button - no extra clicks
+        setIsLoading(true);
+        if (eventId){
+          //PUT - update
+          updateEvent({
+              id: event.id,
+              eventName: event.eventName,
+              eventDate: event.eventDate,
+              eventLocation: event.eventLocation,
+              customerId: parseInt(animal.customerId),
+              
+          })
+          .then(() => navigate(`/animals/detail/${animal.id}`))
+        }else {
+          //POST - add
+          addAnimal({
+              name: animal.name,
+              breed: animal.breed,
+              locationId: parseInt(animal.locationId),
+              customerId: parseInt(animal.customerId)
+          })
+          .then(() => navigate("/animals"))
+        }
       }
+    }
     
     //   const eventDate = Date(event.eventDate)
     //   event.eventDate = eventDate
@@ -71,9 +89,12 @@ export const EventForm = () => {
           </fieldset>
           
           <button className="btn btn-primary"
-            onClick={handleClickSaveEvent}>
-            Save Event
-          </button>
+            disabled={isLoading}
+            onClick={event => {
+            event.preventDefault() // Prevent browser from submitting the form and refreshing the page
+            handleSaveEvent()
+          }}>
+        {eventId ? <>Save Event</> : <>Add Event</>}</button>
       </form>
     )
     }
