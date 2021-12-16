@@ -57,11 +57,11 @@ export const TaskForm = () => {
   // Get tasks. If taskId is in the URL, getTaskById
   useEffect(() => {
       if (taskId){
-          console.log(taskId)
+          console.log("task ID:", taskId)
         getTaskById(taskId)
         .then(task => {
             setTask(task)
-              console.log(taskId)
+              console.log("task ID:", taskId)
             setIsLoading(false)
         })
       } else {
