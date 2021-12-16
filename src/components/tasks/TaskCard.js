@@ -10,7 +10,7 @@ export const TaskCard = ({task}) => {
 
     //Use for checkbox:
     const handleCheckedInputChange = () => {
-        completeTask(task.id)
+        completeTask(task.id, true)
         .then(getTasks)
     }
 
@@ -25,7 +25,7 @@ export const TaskCard = ({task}) => {
 
     //Use to format date into MM/DD/YYYY
     const formattedDate = new Date(task.completionDate);
-    const taskDate = new Intl.DateTimeFormat('en-US', {timeZone: 'UTC'}, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }).format(formattedDate)
+    const taskDate = new Intl.DateTimeFormat('en-US', {timeZone: 'UTC',  weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }).format(formattedDate)
 
     return(
         <section className="task">

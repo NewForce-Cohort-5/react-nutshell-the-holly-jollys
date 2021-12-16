@@ -27,16 +27,29 @@ export const TasksProvider = (props) => {
         .then(res => res.json())
     }
 
-    const completeTask = (taskId) => {
+    //boolean is assigned a variable that can then be told its true or false elsewhere (true in TaskCard for incomplete task list, false in TaskList for the completed tasks list)
+    const completeTask = (taskId, isComplete) => {
         return fetch(`http://localhost:8088/tasks/${taskId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({complete: true}) 
+            body: JSON.stringify({complete: isComplete}) 
         })
         .then(getTasks)
     } 
+
+    // boolean is set to true in this version:
+    // const completeTask = (taskId) => {
+    //     return fetch(`http://localhost:8088/tasks/${taskId}`, {
+    //         method: "PATCH",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({complete: true}) 
+    //     })
+    //     .then(getTasks)
+    // }
 
     const deleteTask = taskId => {
         return fetch(`http://localhost:8088/tasks/${taskId}`, {

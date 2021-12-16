@@ -58,6 +58,16 @@
     padding: 20px;
   }
 
+  .checkedTaskBox-completed input[type=checkbox]  {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.2); /* IE */
+    -moz-transform: scale(1.2); /* FF */
+    -webkit-transform: scale(1.2); /* Safari and Chrome */
+    -o-transform: scale(1.2); /* Opera */
+    transform: scale(1.2);
+    padding: 20px;
+  }
+
   .checkedTaskLabel {
     font-size: 14px;
   }
@@ -88,14 +98,51 @@
     font-size: 14px;
     margin-top: 8px;
     margin-right: 10px;
+
   }
   /* .taskEdit:hover {
     color: blue;
     font-weight: bold;
   } */
 
+  .tasksCompletedList {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 5px 10px;
+    margin-top: 1em;
+  }
+  
+  .tasksCompleted {
+      flex-basis: 70vw;
+      padding: 0;
+      /* border: 1px dashed #1e3250; */
+      color: gray;
+  }
+
+  .taskNameColumn {
+    width: 50vw;
+    padding-right: 10px;
+  }
+  .taskDateColumn {
+    width: 30vw;
+  }
+  .taskCompletedColumn {
+    width: 20vw;
+    text-align: center;
+  }
+  
+
 .taskForm {
   width: 60vw;
   /* margin: 20px auto; */
   padding: 20px;
 }
+
+hr {
+  margin: 2em 0 1.3em;
+}
+
+tr:nth-child(even) {background: rgb(238, 238, 238)}
+tr:nth-child(odd) {background: #FFF}
