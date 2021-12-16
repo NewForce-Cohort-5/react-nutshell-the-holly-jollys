@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { useNavigate } from "react-router"
 import { TasksContext } from "./TaskDataProvider"
 import { TaskCard } from "./TaskCard"
@@ -24,7 +24,8 @@ export const TaskList = () => {
         <div className="tasks">
             {/* {console.log("TaskList: Render", tasks)} */}
             {
-                tasks.filter(task => task.complete === false).map(task => 
+              //filter tasks for those not yet complete, then sort through those and put them in date order, then map to return TaskCard
+                tasks.filter(task => task.complete === false).sort((a,b) => {return new Date(a.completionDate) - new Date (b.completionDate)}).map(task => 
                   <TaskCard key={task.id} task={task} />)
             }
         </div>

@@ -1,36 +1,51 @@
 .tasksContainer {
     padding: 20px;
+    
 }
 
 .tasks {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 5px 10px;
   }
   
   .task {
-      flex-basis: 44%;
+      flex-basis: 30%;
       margin-top: 1em;
       padding: 0;
-      border: 1px solid grey;
+      border: 1px solid #1e3250;
   }
+  /* Highlight first child (most pending task item): */
+  .task:first-child {
+      color: black;
+      background: rgb(202, 232, 250);
+      border: 1px solid blue;
+  }
+    /* Bold part of text in first child (most pending task item: */
+    /* .task:nth-child(1) {
+        font-weight: bold;
+    } */
 
 .taskListContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
   }
   
   .taskList {
-      flex-basis: 60%;
+      flex-basis: 70%;
       padding: 1em;
+      margin: 0 auto;
   }
 
   .checkedTaskContainer {
-    flex-basis: 40%;
-    padding: 1em;
+    flex-basis: 30%;
     text-align: center;
+    padding: 1em;
+    margin: 0 auto;
   }
 
   input[type=checkbox] {
@@ -52,7 +67,35 @@
     margin: 0;
   }
 
-  .taskDate {
+  .taskDateText {
     font-size: 14px;
     margin: 0;
   }
+
+  .taskDate {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .taskEditDel {
+    padding: 5px;
+  }
+
+  .taskEdit, .taskDel {
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 8px;
+    margin-right: 10px;
+  }
+  /* .taskEdit:hover {
+    color: blue;
+    font-weight: bold;
+  } */
+
+.taskForm {
+  width: 60vw;
+  /* margin: 20px auto; */
+  padding: 20px;
+}
