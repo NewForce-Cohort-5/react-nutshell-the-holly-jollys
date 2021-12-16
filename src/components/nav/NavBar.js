@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
@@ -23,13 +23,13 @@ export const NavBar = (props) => {
                         <Link className="nav-link" to="/events">Events</Link>
                     </li>
                 </ul>
-                <span className="navbar-text">
+                {/* <span className="navbar-text">
                     <ul className="nav nav-pills nav-fill">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/logout">Logout</Link>
+                            <Link className="nav-link" to="/register">Register</Link>
                         </li>
                     </ul>
-                </span>
+                </span> */}
             </nav>
         )
     }
