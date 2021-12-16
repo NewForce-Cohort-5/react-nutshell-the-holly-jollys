@@ -1,0 +1,9 @@
+.event {
+    background-color: white;
+}
+
+.event:first-child{
+    background-color: green;
+    font-weight: bolder;
+    color: white;
+}
