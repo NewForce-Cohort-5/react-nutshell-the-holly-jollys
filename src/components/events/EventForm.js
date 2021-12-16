@@ -78,15 +78,15 @@ export const EventForm = () => {
           <fieldset>
               <div className="form-group">
                   <label htmlFor="eventName">Event name:</label>
-                  <input type="text" id="eventName" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Event name" name="eventName" value={event.eventName}/>
+                  <input type="text" id="eventName" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Event name" name="eventName" defaultValue={event.eventName}/>
               </div>
               <div className="form-group">
                   <label htmlFor="eventLocation">Event location:</label>
-                  <input type="text" id="eventLocation" onChange={handleControlledInputChange} required className="form-control" placeholder="Event location" name="eventLocation" value={event.eventLocation}/>
+                  <input type="text" id="eventLocation" onChange={handleControlledInputChange} required className="form-control" placeholder="Event location" name="eventLocation" defaultValue={event.eventLocation}/>
               </div>
               <div className="form-group">
                   <label htmlFor="eventDate">Event date:</label>
-                  <input type="date" id="eventDate" onChange={handleControlledInputChange} required className="form-control" name="eventDate"/>
+                  <input type="date" id="eventDate" onChange={handleControlledInputChange} required className="form-control" name="eventDate" defaultValue={event.eventDate}/>
               </div>
           </fieldset>
           
