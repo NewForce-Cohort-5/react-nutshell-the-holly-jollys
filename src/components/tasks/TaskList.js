@@ -6,7 +6,7 @@ import { TaskCompleteCard } from "./TaskCompleteCard"
 import "./Tasks.css"
 
 export const TaskList = () => {
-  const { tasks, getTasks, completeTask } = useContext(TasksContext)
+  const { tasks, getTasks } = useContext(TasksContext)
 
   const navigate = useNavigate()
 
