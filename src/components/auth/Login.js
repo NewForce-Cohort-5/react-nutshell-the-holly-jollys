@@ -9,7 +9,7 @@ export const Login = (props) => {
     // eslint-disable-next-line
     const password = useRef()
     const existDialog = useRef()
-    const navigate = useNavigate() //now needs to be navigate and useNaviagte()
+    const navigate = useNavigate() //now needs to be navigate and useNavigate()
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
@@ -43,8 +43,8 @@ export const Login = (props) => {
 
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Holly Jolly</h1>
-                    <h2>Please sign in</h2>
+                    <h1>Team Holly Jolly</h1>
+                    <h3>Please sign in</h3>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
                         <input ref={email} type="email"
